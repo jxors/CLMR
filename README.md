@@ -6,7 +6,13 @@ This fork includes a Docker container, for use with AMD GPUs via ROCm.
 docker build -t clmr-rocm .
 
 # run container
-docker run -p 6006:6006 --shm-size 16G --rm --device=/dev/kfd --device=/dev/dri --security-opt seccomp=unconfined --group-add video --mount src=$DATA_DIR,target=/data,type=bind,ro --mount src=$(pwd)/runs:/workspace/CLMR/runs --user $(id -u):$(id -g) -it clmr-rocm
+docker run -p 6006:6006 --shm-size 16G --rm --device=/dev/kfd --device=/dev/dri --security-opt seccomp=unconfined --group-add video --mount src=$DATA_DIR,target=/data,type=bind,ro --mount src=$(pwd)/runs,target=/workspace/CLMR/runs,type=bind --user $(id -u):$(id -g) -it clmr-rocm
+
+# Start training
+python main.py --dataset_dir /data
+
+# Run tensorboard
+tensorboard --host 0.0.0.0 --logdir runs/
 ```
 
 # Contrastive Learning of Musical Representations
