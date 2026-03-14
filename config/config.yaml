@@ -21,7 +21,7 @@ weight_decay: 1.0e-6 # "optimized using LARS [...] and weight decay of 10−6"
 temperature: 0.5 # see appendix B.7.: Optimal temperature under different batch sizes
 
 # reload options
-checkpoint_path: "./runs/CLMRv2-audio/version_0/checkpoints/epoch=199-step=40000.ckpt" # set to the directory containing `checkpoint_##.tar`
+checkpoint_path: "" # "./runs/CLMRv2-audio/version_0/checkpoints/epoch=199-step=40000.ckpt" # set to the directory containing `checkpoint_##.tar`
 
 # logistic regression options
 finetuner_mlp: 0

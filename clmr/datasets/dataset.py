@@ -29,17 +29,14 @@ class Dataset(TorchDataset):
         return file_basename + self._ext_audio
 
     def preprocess(self, n: int, sample_rate: int):
-        fp = self.file_path(n)
-        target_fp = self.target_file_path(n)
-
-        if not os.path.exists(target_fp):
-            preprocess_audio(fp, target_fp, sample_rate)
+        print("Please convert files manually to sample rate:", sample_rate)
+        exit()
 
     def load(self, n):
-        target_fp = self.target_file_path(n)
-        try:
-            audio, sample_rate = torchaudio.load(target_fp)
-        except OSError as e:
-            print("File not found, try running `python preprocess.py` first.\n\n", e)
-            return
+        # Removed preprocessing here, because it preprocessed files into *.wav files.
+        # For large datasets (100s of GBs) this is undesired.
+        # It is more efficient to manually preprocess the data into the correct sample rate.
+        # torchaudio.load can also handle mp3s.
+        target_fp = self.file_path(n)
+        audio, sample_rate = torchaudio.load(target_fp)
         return audio, sample_rate

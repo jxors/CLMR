@@ -1,3 +1,14 @@
+# Fork
+This fork includes a Docker container, for use with AMD GPUs via ROCm.
+
+```bash
+# build container
+docker build -t clmr-rocm .
+
+# run container
+docker run -p 6006:6006 --shm-size 16G --rm --device=/dev/kfd --device=/dev/dri --security-opt seccomp=unconfined --group-add video --mount src=$DATA_DIR,target=/data,type=bind,ro --mount src=$(pwd)/runs:/workspace/CLMR/runs --user $(id -u):$(id -g) -it clmr-rocm
+```
+
 # Contrastive Learning of Musical Representations
 
 PyTorch implementation of [Contrastive Learning of Musical Representations](https://arxiv.org/abs/2103.09410) by Janne Spijkervet and John Ashley Burgoyne.

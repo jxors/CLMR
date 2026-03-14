@@ -1,7 +1,7 @@
 simclr
 torchaudio-augmentations
-torch
-torchaudio
+torch==2.5
+torchaudio==2.5
 torchtext
 pytorch-lightning
 soundfile

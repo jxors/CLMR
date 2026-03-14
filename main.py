@@ -137,10 +137,14 @@ if __name__ == "__main__":
 
     logger = TensorBoardLogger("runs", name="CLMRv2-{}".format(args.dataset))
     if args.checkpoint_path:
-        module = module.load_from_checkpoint(
-            args.checkpoint_path, encoder=encoder, output_dim=train_dataset.n_classes
-        )
-
+        if args.supervised:
+            module = SupervisedLearning.load_from_checkpoint(
+                args.checkpoint_path, encoder=encoder, output_dim=train_dataset.n_classes
+            )
+        else:
+            module = ContrastiveLearning.load_from_checkpoint(
+                args.checkpoint_path, encoder=encoder, output_dim=train_dataset.n_classes
+            )
     else:
         # ------------
         # training
